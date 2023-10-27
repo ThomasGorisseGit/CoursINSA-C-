@@ -34,7 +34,7 @@ public:
     // Contrat :
     //
     void Afficher ( void );
-
+    bool EstEgal ( const Ensemble & unEnsemble) const;
 //-------------------------------------------- Constructeurs - destructeur
 
     Ensemble ( unsigned int maxSize = MAX_SIZE);
@@ -43,7 +43,7 @@ public:
     // Contrat :
     //
 
-    Ensemble ( int t [], unsigned int nbElements = 0);
+    Ensemble ( int t [], unsigned int nbElements);
     // Mode d'emploi :
     //
     // Contrat :

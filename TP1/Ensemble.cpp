@@ -28,6 +28,38 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+bool Ensemble::EstEgal ( const Ensemble & unEnsemble) const {
+    if (this->currentSize != unEnsemble.currentSize)
+    {
+        return false;
+    }
+    bool isEqual=true;
+    unsigned int i =0;
+    while(i< this->currentSize && isEqual )
+    {
+        if(this->ensemble[i] != unEnsemble.ensemble[i])
+        {
+            isEqual=false;
+        }
+        i++;
+    }
+    
+    return isEqual;
+}
+
+
+void Ensemble::Afficher(){
+    cout << this->currentSize <<"\r\n";
+    cout << this->maxSize <<"\r\n";
+    cout << "{";
+    for (unsigned int i =0;i<this->currentSize;i++){
+        cout << this->ensemble[i];
+        if(i<this->currentSize-1){
+            cout << ",";
+        }
+    }
+    cout << "} \r\n";
+}
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -71,19 +103,7 @@ Ensemble::~Ensemble ( )
     delete this->ensemble;
 } //----- Fin de ~Ensemble
 
-void Ensemble::Afficher(){
-    cout << this->currentSize <<"\r\n";
-    cout << this->maxSize <<"\r\n";
-    
-    cout << "{";
-    for (unsigned int i =0;i<this->currentSize;i++){
-        cout << this->ensemble[i];
-        if(i<this->currentSize-1){
-            cout << ", ";
-        }
-    }
-    cout << "} \r\n";
-}
+
 
 //------------------------------------------------------------------ PRIVE
 
