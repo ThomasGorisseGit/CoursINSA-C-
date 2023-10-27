@@ -61,6 +61,7 @@ public:
 protected:
 //----------------------------------------------------currentSize- Méthodes protégées
     bool contains(int value);
+    void sort();
 //----------------------------------------------------- Attributs protégés
 
 

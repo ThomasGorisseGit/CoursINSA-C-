@@ -29,13 +29,6 @@ using namespace std;
 //} //----- Fin de Méthode
 
 
-//------------------------------------------------- Surcharge d'opérateurs
-Ensemble & Ensemble::operator = ( const Ensemble & unEnsemble )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
-
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -55,17 +48,16 @@ Ensemble::Ensemble (unsigned int maxSize )
 
 Ensemble::Ensemble(int t [], unsigned int nbElements){
     //Insertion des valeurs qui ne sont pas déjà contenues dans l'ensemble
-    int nbInsert = 0;
+    this->currentSize = 0;
     this->ensemble = new int[nbElements];
-    for(int i =0;i<nbElements;i++){
-        if(!this->contains( t[i] )){
-            this->ensemble[nbInsert] = t[i];
-            nbInsert ++;
+    for(unsigned int i =0;i<nbElements;i++){
+        if(this->contains( t[i] ) == false){
+            this->ensemble[this->currentSize] = t[i];
+            this->currentSize ++;
         }
     }
-
-    this->currentSize = nbInsert;
     this->maxSize = nbElements;
+    this->sort();
 }
 
 
@@ -80,8 +72,11 @@ Ensemble::~Ensemble ( )
 } //----- Fin de ~Ensemble
 
 void Ensemble::Afficher(){
+    cout << this->currentSize <<"\r\n";
+    cout << this->maxSize <<"\r\n";
+    
     cout << "{";
-    for (int i =0;i<this->currentSize;i++){
+    for (unsigned int i =0;i<this->currentSize;i++){
         cout << this->ensemble[i];
         if(i<this->currentSize-1){
             cout << ", ";
@@ -94,7 +89,7 @@ void Ensemble::Afficher(){
 
 bool Ensemble::contains(int value){
     bool founded = false;
-    int i =0;
+    unsigned int i =0;
     while(i<this->currentSize && !founded){
         if(this->ensemble[i]==value){
             founded = true;
@@ -102,6 +97,19 @@ bool Ensemble::contains(int value){
         i++;
     } 
     return founded;
+}
+void Ensemble::sort(){
+    unsigned int i,j;
+    int switchVariables;
+    for(i = this->currentSize;i>0;i--){
+        for(j = 0;j<i-1;j++){
+            if(this->ensemble[j+1]<this->ensemble[j]){
+                switchVariables = this->ensemble[j+1];
+                this->ensemble[j+1] = this->ensemble[j];
+                this->ensemble[j] = switchVariables;
+            }
+        }
+    }
 }
 //----------------------------------------------------- Méthodes protégées
 
