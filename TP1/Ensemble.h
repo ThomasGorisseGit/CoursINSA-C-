@@ -13,7 +13,7 @@
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes
-
+#define MAX_SIZE 5
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
@@ -33,28 +33,22 @@ public:
     //
     // Contrat :
     //
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-    Ensemble & operator = ( const Ensemble & unEnsemble );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
+    void Afficher ( void );
 
 //-------------------------------------------- Constructeurs - destructeur
-    Ensemble ( const Ensemble & unEnsemble );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
 
-    Ensemble ( );
+    Ensemble ( unsigned int maxSize = MAX_SIZE);
     // Mode d'emploi :
     //
     // Contrat :
     //
+
+    Ensemble ( int t [], unsigned int nbElements = 0);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
 
     virtual ~Ensemble ( );
     // Mode d'emploi :
@@ -65,9 +59,14 @@ public:
 //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
-
+//----------------------------------------------------currentSize- Méthodes protégées
+    bool contains(int value);
 //----------------------------------------------------- Attributs protégés
+
+
+int *ensemble;
+unsigned int maxSize;
+unsigned int currentSize;
 
 };
 

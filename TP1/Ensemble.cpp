@@ -38,24 +38,35 @@ Ensemble & Ensemble::operator = ( const Ensemble & unEnsemble )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Ensemble::Ensemble ( const Ensemble & unEnsemble )
+
+
+Ensemble::Ensemble (unsigned int maxSize )
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Ensemble>" << endl;
+    cout << "Appel au constructeur de <Ensemble> utilisant la maxSize" << endl;
 #endif
-} //----- Fin de Ensemble (constructeur de copie)
+    this->ensemble = new int[maxSize];
+    this->maxSize = maxSize;
+    this->currentSize = 0;
 
-
-Ensemble::Ensemble ( )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de <Ensemble>" << endl;
-#endif
 } //----- Fin de Ensemble
+
+Ensemble::Ensemble(int t [], unsigned int nbElements){
+    //Insertion des valeurs qui ne sont pas déjà contenues dans l'ensemble
+    int nbInsert = 0;
+    this->ensemble = new int[nbElements];
+    for(int i =0;i<nbElements;i++){
+        if(!this->contains( t[i] )){
+            this->ensemble[nbInsert] = t[i];
+            nbInsert ++;
+        }
+    }
+
+    this->currentSize = nbInsert;
+    this->maxSize = nbElements;
+}
 
 
 Ensemble::~Ensemble ( )
@@ -65,10 +76,32 @@ Ensemble::~Ensemble ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Ensemble>" << endl;
 #endif
+    delete this->ensemble;
 } //----- Fin de ~Ensemble
 
+void Ensemble::Afficher(){
+    cout << "{";
+    for (int i =0;i<this->currentSize;i++){
+        cout << this->ensemble[i];
+        if(i<this->currentSize-1){
+            cout << ", ";
+        }
+    }
+    cout << "} \r\n";
+}
 
 //------------------------------------------------------------------ PRIVE
 
+bool Ensemble::contains(int value){
+    bool founded = false;
+    int i =0;
+    while(i<this->currentSize && !founded){
+        if(this->ensemble[i]==value){
+            founded = true;
+        }
+        i++;
+    } 
+    return founded;
+}
 //----------------------------------------------------- Méthodes protégées
 
