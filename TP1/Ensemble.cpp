@@ -27,6 +27,25 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+crduEstInclus Ensemble::EstInclus (const Ensemble &unEnsemble) const {
+    if (this->EstEgal(unEnsemble))
+    {
+        return INCLUSION_LARGE;
+    }
+    else if(this->currentSize < unEnsemble.currentSize)
+    {   
+        int i=0;
+        while (i<this->currentSize)
+        {
+            if(!EnsembleContains(this->ensemble[i], unEnsemble ))
+            {
+                return NON_INCLUSION;
+            }
+        }
+        return INCLUSION_STRICT
+    }
+    return NON_INCLUSION;
+}
 
 bool Ensemble::EstEgal ( const Ensemble & unEnsemble) const {
     if (this->currentSize != unEnsemble.currentSize)
@@ -43,7 +62,6 @@ bool Ensemble::EstEgal ( const Ensemble & unEnsemble) const {
         }
         i++;
     }
-    
     return isEqual;
 }
 
@@ -106,6 +124,18 @@ Ensemble::~Ensemble ( )
 
 
 //------------------------------------------------------------------ PRIVE
+bool Ensemble::EnsembleContains(int value, const Ensemble &unEnsemble ) const
+{
+    bool founded = false;
+    unsigned int i =0;
+    while(i<unEnsemble.currentSize && !founded){
+        if(unEnsemble.ensemble[i]==value){
+            founded = true;
+        }
+        i++;
+    } 
+    return founded;
+}
 
 bool Ensemble::contains(int value){
     bool founded = false;
@@ -132,4 +162,3 @@ void Ensemble::sort(){
     }
 }
 //----------------------------------------------------- Méthodes protégées
-
