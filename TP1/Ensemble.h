@@ -37,6 +37,8 @@ public:
     void Afficher ( void );
     bool EstEgal ( const Ensemble & unEnsemble) const;
     crduEstInclus EstInclus (const Ensemble &unEnsemble) const;
+    bool Contains(int value) const;
+
 //-------------------------------------------- Constructeurs - destructeur
 
     Ensemble ( unsigned int maxSize = MAX_SIZE);
@@ -63,7 +65,6 @@ public:
 protected:
 //----------------------------------------------------currentSize- Méthodes protégées
     bool EnsembleContains(int value, const Ensemble &unEnsemble ) const;
-    bool contains(int value);
     void sort();
     
 //----------------------------------------------------- Attributs protégés

@@ -1,11 +1,3 @@
-/*************************************************************************
-                           Ensemble  -  description
-                             -------------------
-    début                : $DATE$
-    copyright            : (C) $YEAR$ par $AUTHOR$
-    e-mail               : $EMAIL$
-*************************************************************************/
-
 //---------- Réalisation de la classe <Ensemble> (fichier Ensemble.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
@@ -36,13 +28,13 @@ crduEstInclus Ensemble::EstInclus (const Ensemble &unEnsemble) const {
     {   
         int i=0;
         while (i<this->currentSize)
-        {
-            if(!EnsembleContains(this->ensemble[i], unEnsemble ))
+        {   
+            if(!unEnsemble.Contains(this->ensemble[i]))
             {
                 return NON_INCLUSION;
             }
         }
-        return INCLUSION_STRICT
+        return INCLUSION_STRICT;
     }
     return NON_INCLUSION;
 }
@@ -78,7 +70,17 @@ void Ensemble::Afficher(){
     }
     cout << "} \r\n";
 }
-
+bool Ensemble::Contains(int value) const{
+    bool founded = false;
+    unsigned int i =0;
+    while(i<this->currentSize && !founded){
+        if(this->ensemble[i]==value){
+            founded = true;
+        }
+        i++;
+    } 
+    return founded;
+}
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -101,7 +103,7 @@ Ensemble::Ensemble(int t [], unsigned int nbElements){
     this->currentSize = 0;
     this->ensemble = new int[nbElements];
     for(unsigned int i =0;i<nbElements;i++){
-        if(this->contains( t[i] ) == false){
+        if(this->Contains( t[i] ) == false){
             this->ensemble[this->currentSize] = t[i];
             this->currentSize ++;
         }
@@ -124,30 +126,8 @@ Ensemble::~Ensemble ( )
 
 
 //------------------------------------------------------------------ PRIVE
-bool Ensemble::EnsembleContains(int value, const Ensemble &unEnsemble ) const
-{
-    bool founded = false;
-    unsigned int i =0;
-    while(i<unEnsemble.currentSize && !founded){
-        if(unEnsemble.ensemble[i]==value){
-            founded = true;
-        }
-        i++;
-    } 
-    return founded;
-}
 
-bool Ensemble::contains(int value){
-    bool founded = false;
-    unsigned int i =0;
-    while(i<this->currentSize && !founded){
-        if(this->ensemble[i]==value){
-            founded = true;
-        }
-        i++;
-    } 
-    return founded;
-}
+
 void Ensemble::sort(){
     unsigned int i,j;
     int switchVariables;
