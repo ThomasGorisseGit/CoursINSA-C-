@@ -33,6 +33,7 @@ crduEstInclus Ensemble::EstInclus (const Ensemble &unEnsemble) const {
             {
                 return NON_INCLUSION;
             }
+            i++;
         }
         return INCLUSION_STRICT;
     }
