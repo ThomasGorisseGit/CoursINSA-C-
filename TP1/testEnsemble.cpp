@@ -12,7 +12,12 @@ int main(){
     Ensemble e5 (array2,5); 
     e5.Afficher();
     cout << e4.EstInclus(e5) << "\r\n"; 
-    
+    cout <<"Ajouter : "<< e4.Ajouter(3);
+    e4.Afficher();
 
-
+    Ensemble e(10);
+    e.Ajouter(3);
+    e.Ajouter(4);
+    e.Afficher();
+    cout << "Est inclus : " << e.EstInclus(e5);
 }   

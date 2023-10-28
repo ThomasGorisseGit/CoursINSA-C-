@@ -19,6 +19,17 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+crduAjouter Ensemble::Ajouter (int value) {
+    if(this->Contains(value)) return DEJA_PRESENT;
+    else if(this->currentSize == this->maxSize) return PLEIN;
+    else{
+        this->ensemble[currentSize] = value;
+        this->currentSize++;
+        this->sort();
+        return AJOUTE;
+    }
+}
+
 crduEstInclus Ensemble::EstInclus (const Ensemble &unEnsemble) const {
     if (this->EstEgal(unEnsemble))
     {

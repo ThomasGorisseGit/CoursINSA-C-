@@ -17,6 +17,7 @@
 //------------------------------------------------------------------ Types
 
 enum crduEstInclus {NON_INCLUSION, INCLUSION_LARGE, INCLUSION_STRICT};
+enum crduAjouter {DEJA_PRESENT,PLEIN,AJOUTE};
 //------------------------------------------------------------------------
 // Rôle de la classe <Ensemble>
 //
@@ -36,8 +37,9 @@ public:
     //
     void Afficher ( void );
     bool EstEgal ( const Ensemble & unEnsemble) const;
-    crduEstInclus EstInclus (const Ensemble &unEnsemble) const;
     bool Contains(int value) const;
+    crduEstInclus EstInclus (const Ensemble &unEnsemble) const;
+    crduAjouter Ajouter( int value);
 
 //-------------------------------------------- Constructeurs - destructeur
 
@@ -64,7 +66,6 @@ public:
 
 protected:
 //----------------------------------------------------currentSize- Méthodes protégées
-    bool EnsembleContains(int value, const Ensemble &unEnsemble ) const;
     void sort();
     
 //----------------------------------------------------- Attributs protégés
