@@ -23,4 +23,7 @@ int main(){
 
     e.Ajuster(3);
     e.Afficher();
+    e.Retirer(3);
+    e.Afficher();
+    cout << e.Retirer(6);
 }   

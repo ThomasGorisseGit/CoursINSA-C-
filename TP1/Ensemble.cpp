@@ -28,6 +28,23 @@ unsigned int Ensemble::Ajuster(int delta){
     }
     return this->maxSize;
 }
+bool Ensemble::Retirer( int element ){
+
+    bool founded = false;
+    int i =0;
+    while(!founded && i<this->currentSize)
+    {
+        if(this->ensemble[i] == element){
+            founded = true;
+            this->ensemble [i] = this->ensemble[this->currentSize-1];
+            this->currentSize--;
+        }
+        i++;
+    }
+
+    this->maxSize = this->currentSize;
+    return false;
+}
 crduAjouter Ensemble::Ajouter (int value) {
     if(this->Contains(value)) return DEJA_PRESENT;
     else if(this->currentSize == this->maxSize) return PLEIN;

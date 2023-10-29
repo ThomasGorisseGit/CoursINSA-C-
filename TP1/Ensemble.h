@@ -41,6 +41,7 @@ public:
     crduEstInclus EstInclus (const Ensemble &unEnsemble) const;
     crduAjouter Ajouter( int value);
     unsigned int Ajuster(int delta);
+    bool Retirer( int element );
 
 //-------------------------------------------- Constructeurs - destructeur
 
