@@ -20,4 +20,7 @@ int main(){
     e.Ajouter(4);
     e.Afficher();
     cout << "Est inclus : " << e.EstInclus(e5);
+
+    e.Ajuster(3);
+    e.Afficher();
 }   

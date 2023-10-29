@@ -19,6 +19,15 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+unsigned int Ensemble::Ajuster(int delta){
+    if(delta>0){
+        this->maxSize += delta;
+    }
+    else if( (delta<0) && (this->maxSize - delta >= this->currentSize) ){
+        this->maxSize -= delta;
+    }
+    return this->maxSize;
+}
 crduAjouter Ensemble::Ajouter (int value) {
     if(this->Contains(value)) return DEJA_PRESENT;
     else if(this->currentSize == this->maxSize) return PLEIN;
