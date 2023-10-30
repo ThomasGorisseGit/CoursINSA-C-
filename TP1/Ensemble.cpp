@@ -45,6 +45,17 @@ bool Ensemble::Retirer( int element ){
     this->maxSize = this->currentSize;
     return false;
 }
+unsigned int Ensemble::Retirer( const Ensemble & unEnsemble){
+    unsigned int previousMaxCard = this->maxSize;
+    unsigned int nbElemSupp = 0;
+    for(int i =0;i<unEnsemble.currentSize;i++){
+        if(this->Retirer( unEnsemble.ensemble[i])){
+            nbElemSupp++;
+        }
+        this->maxSize = previousMaxCard; // We must not change the previous max card -> we set it back to the previous card max (changed in this->Retirer(int element))
+    }
+    return nbElemSupp;
+}
 crduAjouter Ensemble::Ajouter (int value) {
     if(this->Contains(value)) return DEJA_PRESENT;
     else if(this->currentSize == this->maxSize) return PLEIN;

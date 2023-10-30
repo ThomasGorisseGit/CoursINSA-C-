@@ -42,6 +42,7 @@ public:
     crduAjouter Ajouter( int value);
     unsigned int Ajuster(int delta);
     bool Retirer( int element );
+    unsigned int Retirer(const Ensemble & unEnsemble);
 
 //-------------------------------------------- Constructeurs - destructeur
 
