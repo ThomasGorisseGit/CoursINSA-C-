@@ -5,25 +5,12 @@ using namespace std;
 
 int main(){
     int array[5]  = {1,4,2};
-    int array2[5]  = {1,4,2,3,1};
-   
+    int array2[8]  = {1,4,2,3,1,12,82,19};
+    
     Ensemble e4(array, 3);
-    e4.Afficher();
-    Ensemble e5 (array2,5); 
-    e5.Afficher();
-    cout << e4.EstInclus(e5) << "\r\n"; 
-    cout <<"Ajouter : "<< e4.Ajouter(3);
+    Ensemble e5 (array2,8); 
+    e4.Ajuster(4);
+    cout << e4.Reunir(e5)<<"\r\n";
     e4.Afficher();
 
-    Ensemble e(10);
-    e.Ajouter(3);
-    e.Ajouter(4);
-    e.Afficher();
-    cout << "Est inclus : " << e.EstInclus(e5);
-
-    e.Ajuster(3);
-    e.Afficher();
-    e.Retirer(3);
-    e.Afficher();
-    cout << e.Retirer(6);
 }   

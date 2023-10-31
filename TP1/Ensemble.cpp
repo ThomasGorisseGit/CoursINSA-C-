@@ -19,6 +19,32 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+int Ensemble::Reunir( const Ensemble & unEnsemble)
+{   
+    
+    if(unEnsemble.EstInclus(*this) == 1 || unEnsemble.EstInclus(*this) == 2 ) return 0; 
+    int nbElemAjoute = 0;
+    bool estAjuste = false;
+
+    for(int i=0;i<unEnsemble.currentSize;i++){
+
+        if(this->currentSize == this->maxSize){
+            // L'ensemble doit être ajusté Alors le resultat doit être négatif
+            this->Ajuster(1);
+            estAjuste = true;
+        }
+
+        if(this->Ajouter(unEnsemble.ensemble[i]) == 2){
+            //Si l'element a été ajouté, on incremente le compteur du nombre d'élément ajouté
+            nbElemAjoute++;
+        }
+    }
+    if(estAjuste) nbElemAjoute = -nbElemAjoute;
+    // Si l'ensemble a été ajusté alors le résultat est négatif
+    
+    return nbElemAjoute;
+
+}
 unsigned int Ensemble::Ajuster(int delta){
     if(delta>0){
         this->maxSize += delta;
