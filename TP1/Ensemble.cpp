@@ -19,6 +19,21 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+unsigned int Ensemble::Intersection (const Ensemble & unEnsemble){
+    int i;
+    int nbElemSupp = 0;
+    for(i=0;i<this->currentSize;i++){
+        if( unEnsemble.Contains(this->ensemble[i]) == false ){
+            this->Retirer(this->ensemble[i]);
+            nbElemSupp++;
+            i--;
+        }
+    }
+    cout << "\r\n";
+    return nbElemSupp;
+}
+
+
 int Ensemble::Reunir( const Ensemble & unEnsemble)
 {   
     
@@ -41,17 +56,20 @@ int Ensemble::Reunir( const Ensemble & unEnsemble)
     }
     if(estAjuste) nbElemAjoute = -nbElemAjoute;
     // Si l'ensemble a été ajusté alors le résultat est négatif
-    
+
     return nbElemAjoute;
 
 }
 unsigned int Ensemble::Ajuster(int delta){
     if(delta>0){
+        // Si le delta est positif alors on l'ajoute à la taille max
         this->maxSize += delta;
     }
     else if( (delta<0) && (this->maxSize - delta >= this->currentSize) ){
+        // S'il est possible de diminuer le delta alors on le fait 
         this->maxSize -= delta;
     }
+
     return this->maxSize;
 }
 bool Ensemble::Retirer( int element ){
@@ -61,14 +79,18 @@ bool Ensemble::Retirer( int element ){
     while(!founded && i<this->currentSize)
     {
         if(this->ensemble[i] == element){
+            // Recherche de l'élement 
             founded = true;
             this->ensemble [i] = this->ensemble[this->currentSize-1];
+            // Echange la position avec le dernier element de l'ensemble
+            // Puis on diminue la taille de l'ensemble et on le re-trie
             this->currentSize--;
         }
         i++;
     }
 
     this->maxSize = this->currentSize;
+    this->sort();
     return false;
 }
 unsigned int Ensemble::Retirer( const Ensemble & unEnsemble){
