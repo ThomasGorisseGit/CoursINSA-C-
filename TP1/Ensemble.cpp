@@ -23,13 +23,14 @@ unsigned int Ensemble::Intersection (const Ensemble & unEnsemble){
     int i;
     int nbElemSupp = 0;
     for(i=0;i<this->currentSize;i++){
+        //parcours de l'ensemble, si elem[i] n'est pas dans unEnsemble alors 
         if( unEnsemble.Contains(this->ensemble[i]) == false ){
+            // On le retirer, on augmente le compteur de 1, et on decremente i de 1 car l'ensemble à perdu un element.
             this->Retirer(this->ensemble[i]);
             nbElemSupp++;
             i--;
         }
     }
-    cout << "\r\n";
     return nbElemSupp;
 }
 
@@ -56,7 +57,7 @@ int Ensemble::Reunir( const Ensemble & unEnsemble)
     }
     if(estAjuste) nbElemAjoute = -nbElemAjoute;
     // Si l'ensemble a été ajusté alors le résultat est négatif
-
+    this->sort();
     return nbElemAjoute;
 
 }
@@ -94,22 +95,26 @@ bool Ensemble::Retirer( int element ){
     return false;
 }
 unsigned int Ensemble::Retirer( const Ensemble & unEnsemble){
-    unsigned int previousMaxCard = this->maxSize;
+    unsigned int precedenteCardMax = this->maxSize;
+    // On stock l'ancienne cardinalité
     unsigned int nbElemSupp = 0;
     for(int i =0;i<unEnsemble.currentSize;i++){
         if(this->Retirer( unEnsemble.ensemble[i])){
             nbElemSupp++;
         }
-        this->maxSize = previousMaxCard; // We must not change the previous max card -> we set it back to the previous card max (changed in this->Retirer(int element))
+        this->maxSize = precedenteCardMax; // We must not change the previous max card -> we set it back to the previous card max (changed in this->Retirer(int element))
     }
     return nbElemSupp;
 }
 crduAjouter Ensemble::Ajouter (int value) {
-    if(this->Contains(value)) return DEJA_PRESENT;
+    if(this->Contains(value)) return DEJA_PRESENT; 
     else if(this->currentSize == this->maxSize) return PLEIN;
     else{
+        // Ajoute à la fin, 
         this->ensemble[currentSize] = value;
+        // incrémente la taille
         this->currentSize++;
+        //Retrie l'ensemble
         this->sort();
         return AJOUTE;
     }
@@ -127,6 +132,7 @@ crduEstInclus Ensemble::EstInclus (const Ensemble &unEnsemble) const {
         {   
             if(!unEnsemble.Contains(this->ensemble[i]))
             {
+                // Si un element n'est pas contenu alors l'ensemble n'est pas inclus
                 return NON_INCLUSION;
             }
             i++;
@@ -145,6 +151,7 @@ bool Ensemble::EstEgal ( const Ensemble & unEnsemble) const {
     unsigned int i =0;
     while(i< this->currentSize && isEqual )
     {
+        // Puisque les deux ensembles sont triés, on verifie que les elements sont egaux un par un.
         if(this->ensemble[i] != unEnsemble.ensemble[i])
         {
             isEqual=false;
