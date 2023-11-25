@@ -58,6 +58,36 @@ int pop(Liste* liste){
     parse->prochain = NULL;
     return val;
 }
+
+int getValue(Liste liste,int index){
+    int i=0;
+    Case* parse = liste.current;
+    while(i<index && parse->prochain != NULL){
+        parse = parse->prochain;
+        i++;
+    }
+    if(parse->prochain == NULL && i!=index) return -1;
+   return parse->valeur;
+}
+int getIndex(Liste liste,int element){
+    Case* parse = liste.current;
+    int founded = 0;
+    int index =0;
+    while(parse->prochain != NULL && !founded)
+    {
+        if(element == parse->valeur){
+            founded = 1;
+        }else{
+            index++;
+        }
+        parse = parse->prochain;
+
+    }
+    if(founded == 0) index = -1;
+    return index;
+
+}
+
 int main(){
 
     Liste * maListe = init();
@@ -72,5 +102,15 @@ int main(){
     int val = pop(maListe);
     afficher(*maListe);
 
-    printf("\n Val pop : %d",val);
+    printf("\n Val pop : %d\n",val);
+    printf("GetValue : ");
+    printf("%d\t",getValue(*maListe,0));
+    printf("%d\t",getValue(*maListe,100));
+    printf("%d\n",getValue(*maListe,3));
+    printf("GetIndex : ");
+    printf("%d\t",getIndex(*maListe,99));
+    printf("%d\t",getIndex(*maListe,0));
+    printf("%d\n",getIndex(*maListe,100));
+
+
 }
