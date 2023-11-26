@@ -4,4 +4,6 @@ project(TP_C C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(TP_C
-        LinkedList.c)
+        LinkedList.c
+        Stack.c
+        Stack.c)

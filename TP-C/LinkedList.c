@@ -99,8 +99,8 @@ int main(){
     ajouterAuDebut(maListe,1);
     ajouterAuDebut(maListe,99);
 
-    int val = pop(maListe);
     afficher(*maListe);
+    int val = pop(maListe);
 
     printf("\n Val pop : %d\n",val);
     printf("GetValue : ");
@@ -112,5 +112,7 @@ int main(){
     printf("%d\t",getIndex(*maListe,0));
     printf("%d\n",getIndex(*maListe,100));
 
+
+    afficher(*maListe);
 
 }
